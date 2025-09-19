@@ -1,0 +1,33 @@
+# venv
+bin/
+include/
+lib/
+pyvenv.cfg
+share/
+Scripts/
+# or if you later rename/move it:
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Build/coverage
+build/
+dist/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Editors/OS
+.DS_Store
+Thumbs.db
+
+# Env/misc
+.env
+.env.*
+*.log
