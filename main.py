@@ -9,8 +9,14 @@ app = FastAPI()
 class ReviewsInput(BaseModel):
     reviews: List[str]
 
+
+@app.get("/ping")
+def ping():
+    return {"message": "pong"}
+
+
 @app.post("/reviews")
 def reviews(data: ReviewsInput):
-    combined_text = " ".join(data.reviews)
+    combined_text = " \n".join(data.reviews)
     summary = summarizer(combined_text, max_length=150, min_length=40, do_sample=False)
-    return {"summary": summary[0]['summary_text']}
+    return {"summary": summary[0]["summary_text"]}
