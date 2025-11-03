@@ -1,10 +1,33 @@
+# libryries 
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
 from transformers import pipeline
+# For dataset f
+from datasets import load_dataset
+import requests
+import json
 
-summarizer = pipeline("summarization", model="google/flan-t5-base")
-app = FastAPI()
+"""
+# models
+# "google/flane-t5-bas"  
+# "facebook/bart-large-cnn", modelo mas simple, rquiere acceso
+# "facebook/mbart-large-50", modelo multilingüe, mas pesado, requiere acceso 
+# Modelos de traducción-> "Helsinki-NLP/opus-mt-en-es", con pipeline.
+# Modelos mas potentes -> 
+# LLaMA (Meta)
+#from transformers import AutoModelForCausalLM, AutoTokenizer
+#model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-hf")
+# Mistral (muy eficiente)
+#model = AutoModelForCausalLM.from_pretrained("mistralai/Mistral-7B-v0.1")
+
+# Modelos en epañol 
+"flax-community/t5-base-spanish", modelo descontinuado, error en la carga del modelo
+"""
+#summarizer = pipeline("summarization", model=  "flax-community/t5-base-spanish"  )
+summarizer = pipeline("text2text-generation", model="google/mt5-base")  
+app = FastAPI() 
+
 
 class ReviewsInput(BaseModel):
     reviews: List[str]
