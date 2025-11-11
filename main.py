@@ -12,7 +12,7 @@ class ReviewsInput(BaseModel):
 
 @app.get("/ping")
 def ping():
-    return {"message": "pong"}
+    return {"msg": "pong"}
 
 
 @app.post("/reviews")
