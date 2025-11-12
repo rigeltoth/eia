@@ -1,22 +1,15 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
-from typing import List
-from transformers import pipeline
+from src.routes import reviews
 
-summarizer = pipeline("summarization", model="google/flan-t5-base")
-app = FastAPI()
+app = FastAPI(title="Mi API Organizada", version="1.0.0")
 
-class ReviewsInput(BaseModel):
-    reviews: List[str]
+# Registrar rutas
+app.include_router(reviews.router, prefix="/api/reviews", tags=["Reviews"])
 
+@app.get("/")
+def root():
+    return {"message": "Bienvenido a la API"}
 
-@app.get("/ping")
-def ping():
-    return {"message": "pong"}
-
-
-@app.post("/reviews")
-def reviews(data: ReviewsInput):
-    combined_text = " \n".join(data.reviews)
-    summary = summarizer(combined_text, max_length=150, min_length=40, do_sample=False)
-    return {"summary": summary[0]["summary_text"]}
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)

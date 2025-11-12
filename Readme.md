@@ -37,7 +37,7 @@ pip install -r requirements.txt
 ### Recommended dev starter (use this to run the FastAPI dev server)
 
 ```bash
-uvicorn main:app --reload --host 127.0.0.1 --port 8000
+python main.py
 ```
 
 Open docs at: http://127.0.0.1:8000/docs
